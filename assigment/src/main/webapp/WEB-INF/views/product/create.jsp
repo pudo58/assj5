@@ -19,27 +19,33 @@
 	<form:form action="/products/add" method="post" modelAttribute="product">
 		<div>
 		<label>Name:</label>
-		<form:input path="name"/>
+		<form:input  path="name"/>
+		<form:errors path="name" element="small" style="color:red;"></form:errors><br>
 		</div>
 		<div>
 		image:
 		<form:input path="image"/>
+		<form:errors path="image" element="small" style="color:red;"></form:errors><br>
 		</div>
 		<div>
 		price:
 		<form:input path="price"/>
+				<form:errors path="price" element="small" style="color:red;"></form:errors><br>
 		</div>
 		<div>
 		created:
-		<form:input type="date"  path="created"/>
+		<form:input type="date"  path="createdDate"/>
+				<form:errors path="createdDate" element="small" style="color:red;"></form:errors><br>
 		</div>
 		<div>
 		available:
 		<form:input path="available"/>
+				<form:errors path="available" element="small" style="color:red;"></form:errors><br>
 		
 		<form:select path="category">
 		<form:options items="${category }"/>
 		</form:select>
+				<form:errors path="category" element="small" style="color:red;"></form:errors><br>
 		</div>
 		<button>Thêm mới</button>
 		

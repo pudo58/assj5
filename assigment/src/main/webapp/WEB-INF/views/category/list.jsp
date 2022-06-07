@@ -53,18 +53,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/category/list/all">
+        <form action="/category/update" method="post">
         <label class="form-label">ID</label>
         <input type="text" name="id" id="id" class="form-control" readonly="readonly">
          <label class="form-label">Name</label>
         <input type="text" name="name" id="name" class="form-control">
-        <button>Update</button>
+         <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+     
     </div>
   </div>
 </div>

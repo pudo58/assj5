@@ -25,7 +25,7 @@ public class Order {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="username")
+	@JoinColumn(name="user_id")
 	private Account user;
 	
 	@Column(name="created")

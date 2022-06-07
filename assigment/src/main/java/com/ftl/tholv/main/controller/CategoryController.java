@@ -2,6 +2,7 @@ package com.ftl.tholv.main.controller;
 
 import java.util.Optional;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,13 +34,19 @@ public class CategoryController {
 		return "category/create";
 	}
 @PostMapping("/admin/category/create")
-public String create(@ModelAttribute("category")com.ftl.tholv.main.beans.Category category) {
+public String create(@Validated@ModelAttribute("category")com.ftl.tholv.main.beans.Category category,BindingResult rs) {
 	synchronized (Category.class) {
-		Category s=new Category();
-		s.setId(category.getId());
-		s.setName(category.getName());
+	
 		try {
-			c.saveAndFlush(s);
+			if(!rs.hasErrors()) {
+				Category s=new Category();
+				s.setId(category.getId());
+				s.setName(category.getName());
+				c.saveAndFlush(s);
+				return "redirect:/category/list/all";
+			}
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -52,23 +61,20 @@ public String paging(ModelMap model,@RequestParam("p") Optional<Integer> p) {
    model.addAttribute("page",list);
 	return "category/list";
 }
-@PostMapping("/category/list/all")
+@PostMapping("/category/update")
 public String update(com.ftl.tholv.main.beans.Category category)
 {
-	Category ca=new Category();
-	ca.setId(category.getId());
-	ca.setName(category.getName());
-	if(c.existsById(ca.getId())==true) {
+	Category ca=c.getById(category.getId());
+	 ca.setName(category.getName());	
 		c.save(ca);
-	}
-	return "category/list";
+	return "redirect:/category/list/all";
 }
 
 @RequestMapping("/category/delete")
 public String delete(HttpServletRequest req) {
 	Integer id=Integer.parseInt(req.getParameter("id"));
 	c.delete(c.getOne(id));
-	return "category/list";
+	return "redirect:/category/list/all";
 	
 }
 }

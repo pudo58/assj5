@@ -10,7 +10,8 @@
 <body>
 <form:form modelAttribute="category" method="POST" action="/admin/category/create">
 <label>Tên</label>
-<form:input path="name"/>
+<form:input path="name"/><br>
+<form:errors path="name" element="small" cssStyle="color:red;"></form:errors>
 <button>Them</button>
 </form:form>
 </body>

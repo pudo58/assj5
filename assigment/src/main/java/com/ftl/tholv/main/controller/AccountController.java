@@ -31,8 +31,8 @@ public class AccountController {
 	}
 @PostMapping("/admin/account/reg")
 	public String create(@ModelAttribute("account") com.ftl.tholv.main.beans.Account acc) {
-	   Account account=new Account();
-	  account.setId(acc.getId());
+	  Account account=new Account();
+	 account.setId(acc.getId());
 	 account.setUsername(acc.getUsername());
 	 account.setPassword(acc.getPassword());
 	 account.setFullname(acc.getFullname());

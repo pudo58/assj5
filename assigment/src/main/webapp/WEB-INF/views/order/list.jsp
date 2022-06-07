@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
      <%@ taglib  uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>   
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -24,18 +24,24 @@
 </tr>
 </thead>
 <tbody>
-<c:forEach var="item" items="${list}">
+<c:forEach var="item" items="${page.content}">
 <tr>
 <td class="id">${item.id }</td>
-<td class="username">${item.username}</td>
+<td class="username">${item.user.id}</td>
 <td class="created">${item.createdDate}</td>
 <td class="address">${item.address }</td>
-<td><a href="/order/delete?id="${item.id } class="btn btn-danger">Xóa</a></td>
+<td><a href="/order/delete?id=${item.id }" class="btn btn-danger">Xóa</a></td>
 <td><button type="button" class="btn btn-primary update">Update</button></td>
 </tr>
 </c:forEach>
 </tbody>
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="/category/list/all?p=${page.number==0?'0':page.number-1}">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="/category/list/all?p=${page.number+1 }">Next</a></li>
+  </ul>
+</nav>
 <!-- Modal -->
 <div class="modal fade" id="update-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -48,11 +54,11 @@
         <form action="/order/update">
         <label class="form-label">ID</label>
         <input type="text" name="id" id="id" class="form-control" readonly="readonly">
-         <label class="form-label">userame</label>
-        <input type="text" name="username" id="username" class="form-control">
-        <label class="form-label">userame</label>
+         <label class="form-label">user id</label>
+        <input type="text" name="user" id="user_id" class="form-control"  readonly="readonly">
+        <label class="form-label">Created date</label>
         <input type="date" name="createdDate" id="createdDate" class="form-control">
-        <label class="form-label">userame</label>
+        <label class="form-label">address</label>
         <input type="text" name="address" id="address" class="form-control">
         <button>Update</button>
         </form>
@@ -72,11 +78,14 @@ $(document).ready(function(){
 		var created=$(this).closest("tr").find(".created").text();
 		var add=$(this).closest("tr").find(".address").text();
 		$("#update-modal").find("#id").val(id);
-		$("#update-modal").find("#username").val(username);
+		$("#update-modal").find("#user_id").val(username);
 		$("#update-modal").find("#createdDate").val(created);
 		$("#update-modal").find("#address").val(add);
-		$("#update-modal").modal("show");p
+		$("#update-modal").modal("show");
+	})
 })
+
 </script>
+
 </body>
 </html>

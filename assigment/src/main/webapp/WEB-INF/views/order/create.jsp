@@ -19,11 +19,16 @@
 <form:select class="form-control" path="user">
 <form:options items="${acc }"/>
 </form:select>
+<form:errors path="user" element="small" class="text-danger"></form:errors>
 <label class="form-label">Ngày</label>
 <form:input class="form-control" path="createdDate" type="date"/>
+<form:errors path="createdDate" element="small" class="text-danger"></form:errors>
+<br>
 <label class="form-label">Địa chỉ</label>
 <form:input class="form-control" path="address"/>
-<button>Thêm</button>
+<br>
+<form:errors path="address" element="small" class="text-danger"></form:errors>
+<br><button>Thêm</button>
 </form:form>
 </body>
 </html>

@@ -13,15 +13,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="order_details")
+@Table(name="orderdetails")
 public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int id;
+	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name="order_id")
+	@JoinColumn(name="orderid")
 	private Order order;
 
 	@ManyToOne
@@ -29,8 +29,8 @@ public class OrderDetail {
 	private Product product;
 
 	@Column(name="price")
-	private double price;
+	private Double price;
 
-	@Column(name="quatity")
-	private int quatity;
+	@Column(name="quantity")
+	private Integer quantity;
 }
